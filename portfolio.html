@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Bartosz Ignaczak</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Portfolio Bartosz Ignaczak</h1>
+    </header>
+
+    <main>
+        <div class="container">
+
+            <div class="left-block">
+                <p id="randomText">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus luctus urna sed urna ultricies ac tempor dui sagittis.</p>
+            </div>
+
+            <div class="right-block">
+                <label for="nameInput">Wpisz swoje imię:</label>
+                <input type="text" id="nameInput" placeholder="Twoje imię">
+                
+                <div class="configurator">
+                    <label for="fontSelect">Wybierz czcionkę:</label>
+                    <select id="fontSelect">
+                        <option value="Arial">Arial</option>
+                        <option value="Verdana">Verdana</option>
+                        <option value="Times New Roman">Times New Roman</option>
+                        <option value="Courier New">Courier New</option>
+                        <option value="Georgia">Georgia</option>
+                    </select>
+
+                    <label for="colorSelect">Wybierz kolor:</label>
+                    <select id="colorSelect">
+                        <option value="black">Czarny</option>
+                        <option value="red">Czerwony</option>
+                        <option value="blue">Niebieski</option>
+                        <option value="green">Zielony</option>
+                        <option value="purple">Fioletowy</option>
+                    </select>
+
+                    <label for="boldCheckbox">
+                        <input type="checkbox" id="boldCheckbox"> Pogrubienie tekstu
+                    </label>
+
+                    <label for="marqueeCheckbox">
+                        <input type="checkbox" id="marqueeCheckbox"> Przesuwający się tekst
+                    </label>
+                </div>
+
+                <div class="result">
+                    <p id="displayName">Witaj!</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        Autor strony: Bartosz Ignaczak klasa 4B
+    </footer>
+
+    <script>
+
+        const randomText = document.getElementById("randomText");
+        const fonts = ["Arial", "Verdana", "Times New Roman", "Courier New", "Georgia"];
+        
+        function changeRandomStyle() {
+            const randomFont = fonts[Math.floor(Math.random() * fonts.length)];
+            const randomColor = `#${Math.floor(Math.random()*16777215).toString(16)}`;
+            randomText.style.fontFamily = randomFont;
+            randomText.style.color = randomColor;
+        }
+        
+        setInterval(changeRandomStyle, 1000);
+
+
+        const nameInput = document.getElementById("nameInput");
+        const fontSelect = document.getElementById("fontSelect");
+        const colorSelect = document.getElementById("colorSelect");
+        const boldCheckbox = document.getElementById("boldCheckbox");
+        const marqueeCheckbox = document.getElementById("marqueeCheckbox");
+        const displayName = document.getElementById("displayName");
+
+        function updateDisplay() {
+            let name = nameInput.value || "Witaj!";
+            displayName.innerHTML = marqueeCheckbox.checked ? `<marquee>${name}</marquee>` : name;
+            displayName.style.fontFamily = fontSelect.value;
+            displayName.style.color = colorSelect.value;
+            displayName.style.fontWeight = boldCheckbox.checked ? "bold" : "normal";
+        }
+
+
+        nameInput.addEventListener("input", updateDisplay);
+        fontSelect.addEventListener("change", updateDisplay);
+        colorSelect.addEventListener("change", updateDisplay);
+        boldCheckbox.addEventListener("change", updateDisplay);
+        marqueeCheckbox.addEventListener("change", updateDisplay);
+    </script>
+
+</body>
+</html>
